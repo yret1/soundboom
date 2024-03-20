@@ -5,6 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '640px', // default
+      'md': '768px', // default
+      'lg': '1200px', // default
+      'xl': '1280px', // default
+      '2xl': '1536px', // default
+      'custom-sm': '480px', // customized
+      'custom-md': '800px', // customized
+    },
     extend: {
       fontSize: {
         56: '3.5rem',
