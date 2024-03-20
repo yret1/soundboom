@@ -5,10 +5,10 @@ const Footer = () => {
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                 <h1 className='text-white font-bold text-28 text-center py-12 md:text-left'>SoundBoom</h1>
                 <ul className='text-white font-bold text-13 flex items-center justify-center flex-col uppercase gap-4 pb-12 md:flex-row md:justify-start lg:pb-0'>
-                    <li className='tracking-2'>Home</li>
-                    <li className='tracking-2'>Headphones</li>
-                    <li className='tracking-2'>Speakers</li>
-                    <li className='tracking-2'>Earphones</li>
+                    <li className='tracking-2 hover:text-primary-100'>Home</li>
+                    <li className='tracking-2 hover:text-primary-100'>Headphones</li>
+                    <li className='tracking-2 hover:text-primary-100'>Speakers</li>
+                    <li className='tracking-2 hover:text-primary-100'>Earphones</li>
                 </ul>
             </div>
         
