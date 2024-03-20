@@ -1,10 +1,17 @@
+
 import Footer from "./components/Footer"
+import About from "./components/About"
+import Nav from "./components/Nav"
+import Navoptions from "./components/Navoptions"
 
 
 function App() {
   return (
     <main className="font-manrope">
-    <Footer></Footer>
+      <Nav />
+      <Navoptions />
+      <About />
+    <Footer/>
     </main>
   )
 }
