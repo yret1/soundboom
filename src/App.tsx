@@ -1,5 +1,6 @@
 import About from "./components/About"
 import Nav from "./components/Nav"
+import Navoptions from "./components/Navoptions"
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <main>
       <Nav />
       <About />
+      <Navoptions />
 
     </main>
   )
