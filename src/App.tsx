@@ -7,8 +7,8 @@ function App() {
   return (
     <main>
       <Nav />
-      <About />
       <Navoptions />
+      <About />
 
     </main>
   )
