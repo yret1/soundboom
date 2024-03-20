@@ -1,4 +1,4 @@
-
+import {Link} from "react-router-dom";
 import Headphone from "../assets/shared/desktop/image-category-thumbnail-headphones.png";
 import Speaker from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
 import Earphones from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
@@ -39,7 +39,10 @@ const Item = ({title}: {title : string}) => {
 
             <section className="w-full h-full flex flex-col justify-end pb-12 items-center">
                 <h1 className="font-manrope font-bold text-[15px] tracking-1">{text}</h1>
+
+                <Link to="/headphones">
                     <Shopbutton />
+                </Link>
             </section>
 
 

@@ -1,18 +1,24 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Footer from "./components/Footer"
 import About from "./components/About"
 import Nav from "./components/Nav"
-import Navoptions from "./components/Navoptions"
-
+import Home from "./pages/Home"
+import Headphones from "./pages/Headphones"
 
 function App() {
   return (
-    <main className="font-manrope">
-      <Nav />
-      <Navoptions />
-      <About />
-    <Footer/>
-    </main>
+    <BrowserRouter>
+      <main className="font-manrope">
+        <Nav />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/headphones" element={<Headphones />} />
+          </Routes>
+        <About />
+      <Footer/>
+      </main>
+    </BrowserRouter>
   )
 }
 

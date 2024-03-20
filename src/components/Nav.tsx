@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import Cart from '../assets/shared/desktop/icon-cart.svg'
 import Hamburger from '../assets/shared/tablet/icon-hamburger.svg'
 import Logo from '../assets/shared/desktop/logo.svg'
@@ -13,10 +14,10 @@ const Nav = () => {
         </div>
         <nav className='flex-1 hidden lg:block'>
             <ul className='flex justify-center gap-10 items-center font-manrope tracking-2 font-bold text-white'>
-                <li className='hover:text-primary-100 cursor-pointer'>HOME</li>
-                <li className='hover:text-primary-100 cursor-pointer'>HEADPHONES</li>
-                <li className='hover:text-primary-100 cursor-pointer'>SPEAKERS</li>
-                <li className='hover:text-primary-100 cursor-pointer'>EARPHONES</li>
+                <Link to={"/"} className='hover:text-primary-100 cursor-pointer'>HOME</Link>
+                <Link to={"/headphones"} className='hover:text-primary-100 cursor-pointer'>HEADPHONES</Link>
+                <Link to={"/speakers"} className='hover:text-primary-100 cursor-pointer'>SPEAKERS</Link>
+                <Link to={"/earphones"} className='hover:text-primary-100 cursor-pointer'>EARPHONES</Link>
             </ul>
         </nav>
         <div className='h-full w-12 flex justify-end pr-5 items-center'>
