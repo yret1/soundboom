@@ -1,9 +1,10 @@
+import Footer from "./components/Footer"
 
 
 function App() {
   return (
-    <main>
-
+    <main className="font-manrope">
+    <Footer></Footer>
     </main>
   )
 }
