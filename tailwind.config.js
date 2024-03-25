@@ -53,7 +53,7 @@ export default {
         'secondary' : {
           100: '#101010',
           200: '#F1F1F1',
-          300: '#FAFAFA'
+          300: '#FAFAFA',
         }
       }
     },
