@@ -19,9 +19,9 @@ const Footer = () => {
 <p className='text-white font-bold text-15 text-center opacity-50 leading-25 pb-12'>Copyright 2021. All Rights Reserved</p>
 
         <article className="flex items-center justify-center gap-4 pb-12">
-        <img src="src/assets/shared/desktop/icon-twitter.svg" alt="twitter icon"/> 
-        <img src="src/assets/shared/desktop/icon-instagram.svg" alt="instagram icon"/> 
-        <img className="filter hover:grayscale hover:brightness-150" src="src/assets/shared/desktop/icon-facebook.svg" alt="facebook icon"/> 
+        <img src="/assets/shared/desktop/icon-twitter.svg" alt="twitter icon"/> 
+        <img src="/assets/shared/desktop/icon-instagram.svg" alt="instagram icon"/> 
+        <img className="filter hover:grayscale hover:brightness-150" src="/assets/shared/desktop/icon-facebook.svg" alt="facebook icon"/> 
         </article>
 </div>
         
