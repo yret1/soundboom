@@ -37,7 +37,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <main className="font-manrope">
+      <main className="font-manrope overflow-x-hidden">
         <Nav setCurrent={setCategory}/>
           <Routes>
           <Route path="/" element={<Home setCategory={setCategory} />} />
@@ -45,7 +45,7 @@ function App() {
             <Route path="/category" element={<Category products={products as any} current={category} setCurrent={setCategory} />} />
           </Routes>
         <About />
-      <Footer/>
+      <Footer setCurrent={setCategory}/>
       </main>
     </BrowserRouter>
   )
