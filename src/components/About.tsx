@@ -1,6 +1,6 @@
-import bgMob from "../assets/shared/mobile/image-best-gear.jpg";
-import bgTab from "../assets/shared/tablet/image-best-gear.jpg";
-import bgDesk from "../assets/shared/desktop/image-best-gear.jpg";
+import bgMob from "/assets/shared/mobile/image-best-gear.jpg";
+import bgTab from "/assets/shared/tablet/image-best-gear.jpg";
+import bgDesk from "/assets/shared/desktop/image-best-gear.jpg";
 
 
 import { useState, useEffect } from "react";

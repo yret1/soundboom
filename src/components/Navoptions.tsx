@@ -1,12 +1,14 @@
 import {Link} from "react-router-dom";
-import Headphone from "../assets/shared/desktop/image-category-thumbnail-headphones.png";
-import Speaker from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
-import Earphones from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
+import Headphone from "/assets/shared/desktop/image-category-thumbnail-headphones.png";
+import Speaker from "/assets/shared/desktop/image-category-thumbnail-speakers.png";
+import Earphones from "/assets/shared/desktop/image-category-thumbnail-earphones.png";
 import Shopbutton from "./Shopbutton";
 
+interface setcategory {
+  setCurrent: (category: string) => void
+}
 
-
-const Item = ({title}: {title : string}) => {
+const Item = ({title, setCurrent}: {title : string; setCurrent: setcategory['setCurrent']}) => {
 
     let img : string = "";
     let text: string = "";
@@ -40,7 +42,7 @@ const Item = ({title}: {title : string}) => {
             <section className="w-full h-full flex flex-col justify-end pb-12 items-center">
                 <h1 className="font-manrope font-bold text-[15px] tracking-1">{text}</h1>
 
-                <Link to="/headphones">
+                <Link to="/category" onClick={() => setCurrent(title)}>
                     <Shopbutton />
                 </Link>
             </section>
@@ -55,16 +57,19 @@ const Item = ({title}: {title : string}) => {
 }
 
 
+interface NavOptionsProps {
+    setCurrent: (category: string) => void;
+  }
 
 
-const Navoptions = () => {
+const Navoptions : React.FC<NavOptionsProps> = ({ setCurrent }) => {
 
     const items = ["Headphones", "Speakers", "Earphones"];
   return (
     <section className="w-full flex flex-col justify-center items-center p-8 px-10 md:flex-row md:gap-10">
 
         {items.map((item, index) => {
-            return (<Item title={item} key={index} />)
+            return (<Item setCurrent={setCurrent} title={item} key={index} />)
         })}
 
 

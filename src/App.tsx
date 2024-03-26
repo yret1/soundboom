@@ -36,9 +36,9 @@ function App() {
   return (
     <BrowserRouter>
       <main className="font-manrope">
-        <Nav />
+        <Nav setCurrent={setCategory}/>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home setCategory={setCategory} />} />
             <Route path="/category" element={<Category products={products} current={category} setCurrent={setCategory} />} />
           </Routes>
         <About />
