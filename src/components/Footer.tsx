@@ -1,14 +1,21 @@
-const Footer = () => {
+import { Link } from "react-router-dom"
+
+interface NavOptionsProps {
+  setCurrent: (category: string) => void
+
+}
+
+const Footer : React.FC<NavOptionsProps> = ({setCurrent}) => {
   return (
     <footer className='bg-secondary-100 h-auto'>
         <section className='px-12 md:px-40'>
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                 <h1 className='text-white font-bold text-28 text-center py-12 md:text-left'>SoundBoom</h1>
                 <ul className='text-white font-bold text-13 flex items-center justify-center flex-col uppercase gap-4 pb-12 md:flex-row md:justify-start lg:pb-0'>
-                    <li className='tracking-2 hover:text-primary-100'>Home</li>
-                    <li className='tracking-2 hover:text-primary-100'>Headphones</li>
-                    <li className='tracking-2 hover:text-primary-100'>Speakers</li>
-                    <li className='tracking-2 hover:text-primary-100'>Earphones</li>
+                    <Link to={"/"} className='tracking-2 hover:text-primary-100'>Home</Link>
+                    <Link to={"/category"} onClick={() => setCurrent("Headphones")} className='tracking-2 cursor-pointer hover:text-primary-100'>Headphones</Link>
+                    <Link to={"/category"} onClick={() => setCurrent("Speakers")} className='tracking-2 cursor-pointer hover:text-primary-100'>Speakers</Link>
+                    <Link to={"/category"} onClick={() => setCurrent("Earphones")} className='tracking-2 cursor-pointer hover:text-primary-100'>Earphones</Link>
                 </ul>
             </div>
         
