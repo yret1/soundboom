@@ -5,6 +5,8 @@ import About from "./components/About"
 import Nav from "./components/Nav"
 import Home from "./pages/Home"
 import Headphones from "./pages/Headphones"
+import ProductDetail from "./pages/ProductDetail"
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/headphones" element={<Headphones />} />
+            <Route path="/productdetail" element={<ProductDetail />} />
           </Routes>
         <About />
       <Footer/>
