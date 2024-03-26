@@ -8,9 +8,10 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Nav from "./components/Nav"
 import Home from "./pages/Home"
+import ProductDetail from "./pages/ProductDetail"
 import Category from "./pages/Category"
-
 import { speakerCategories, headphoneCategories, earCategories } from "./Data"
+
 
 
 function App() {
@@ -39,7 +40,8 @@ function App() {
       <main className="font-manrope">
         <Nav setCurrent={setCategory}/>
           <Routes>
-            <Route path="/" element={<Home setCategory={setCategory} />} />
+          <Route path="/" element={<Home setCategory={setCategory} />} />
+            <Route path="/productdetail" element={<ProductDetail />} />
             <Route path="/category" element={<Category products={products as any} current={category} setCurrent={setCategory} />} />
           </Routes>
         <About />
