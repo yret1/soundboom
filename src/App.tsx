@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import { useState, useEffect } from "react"
@@ -14,8 +15,8 @@ import { speakerCategories, headphoneCategories, earCategories } from "./Data"
 
 function App() {
 
-  const [category, setCategory] = useState<string>("Headphones")
-  const [products, setProducts] = useState<object[]>([])
+  const [category, setCategory] = useState<string>("Headphones");
+  const [products, setProducts] = useState<object[]>([]);
 
 
 
@@ -39,7 +40,7 @@ function App() {
         <Nav setCurrent={setCategory}/>
           <Routes>
             <Route path="/" element={<Home setCategory={setCategory} />} />
-            <Route path="/category" element={<Category products={products} current={category} setCurrent={setCategory} />} />
+            <Route path="/category" element={<Category products={products as any} current={category} setCurrent={setCategory} />} />
           </Routes>
         <About />
       <Footer/>

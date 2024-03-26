@@ -1,14 +1,8 @@
 import Catproductdisplay from "../components/Catproductdisplay"
 import Navoptions from "../components/Navoptions"
 
-type CategoryProps = {
-    current: string,
-    setCurrent: (category: string) => void,
-    products: Product[],
-
-}
-
-type Product = {
+type Products = [
+  {
     name: string,
     id: number,
     description: string,
@@ -17,7 +11,24 @@ type Product = {
         mobile: string,
     },
     new: boolean,
+  }
+]
 
+type Product = {
+  name: string,
+  id: number,
+  description: string,
+  image: {
+      desktop: string,
+      mobile: string,
+  },
+  new: boolean,
+}
+
+type CategoryProps = {
+    current: string,
+    setCurrent: (category: string) => void,
+    products: Products,
 
 }
 
@@ -35,7 +46,6 @@ const Category :React.FC<CategoryProps> = ({current,setCurrent,products}) => {
     </section>
     <section>
     <Navoptions setCurrent={setCurrent} />
-
     </section>
     </section>
   )
