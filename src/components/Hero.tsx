@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
+interface HeroProps {
+  find: (id: number) => void;
 
-const Hero = () => {
+}
+const Hero : React.FC<HeroProps> = ({find}) => {
+
   return (
     <section className="flex justify-center lg:justify-start items-center bg-[url('/assets/home/mobile/image-header.jpg')] bg-cover bg-bottom h-[33rem] md:bg-[url('/assets/home/tablet/image-header.jpg')] lg:bg-[url('/assets/home/desktop/image-hero.jpg')]">
       <article className="flex flex-col justify-center items-center text-center px-8 md:w-3/5 lg:items-start lg:justify-start lg:py-0 lg:text-left lg:w-4/12 lg:mx-40">
@@ -14,7 +19,10 @@ const Hero = () => {
           Experience natural, lifelike audio and exceptional build quality made
           for the passionate music enthusiast.
         </p>
-        <Button />
+        <Link to={"/product"}>
+
+        <Button find={find} id={4} />
+        </Link>
       </article>
     </section>
   );

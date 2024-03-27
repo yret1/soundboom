@@ -12,7 +12,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ setCategory, find }) => {
   return (
     <>
-      <Hero />
+      <Hero find={find} />
       <Navoptions setCurrent={setCategory} />
       <ProductHighlightSpeakerOrange find={find} />
       <ProductHighlightSpeakerGray find={find} />
