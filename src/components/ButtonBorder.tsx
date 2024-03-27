@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 interface staticProps {
-  find: (id : number) => void,
-  id: number
-
+  find: (id: number) => void;
+  id: number;
 }
-const ButtonBlack: React.FC<staticProps> = ({find, id }) => {
-
+const ButtonBlack: React.FC<staticProps> = ({ find, id }) => {
   const handleClick = () => {
     // Ensure that 'find' function is available and 'id' is valid
     if (find && id) {
@@ -17,11 +15,16 @@ const ButtonBlack: React.FC<staticProps> = ({find, id }) => {
 
   return (
     <>
-    <Link to={"/product"}>
-    <button onClick={handleClick} className="py-4 px-5 border-2 border-black text-14 tracking-1 font-bold text-black hover:bg-black hover:text-white">SEE PRODUCT</button>
-    </Link>
+      <Link to={"/product"}>
+        <button
+          onClick={handleClick}
+          className="py-4 px-5 border-2 border-black text-14 tracking-1 font-bold text-black hover:bg-black hover:text-white"
+        >
+          SEE PRODUCT
+        </button>
+      </Link>
     </>
-  )
-}
+  );
+};
 
-export default ButtonBlack
+export default ButtonBlack;

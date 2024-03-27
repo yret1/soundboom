@@ -18,23 +18,19 @@ type CheckoutProps = {
 };
 
 export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
+  const [paypal, setPaypal] = useState(false);
+  const [credit, setCredit] = useState(false);
 
-
-    const [paypal, setPaypal] = useState(false);
-    const [credit, setCredit] = useState(false);
-
-
-
-    useEffect(() => {
-        if (details.method === "paypal") {
-            setPaypal(true);
-            setCredit(false);
-        } else if (details.method === "credit") {
-            setCredit(true);
-            setPaypal(false);
-        }
-    }, [paypal, credit]);
-
+  useEffect(() => {
+    if (details.method === "paypal") {
+      setPaypal(true);
+      setCredit(false);
+    } else if (details.method === "credit") {
+      setCredit(true);
+      setPaypal(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paypal, credit]);
 
   return (
     <section className="px-6 flex flex-col justify-center items-center bg-secondary-200">
@@ -88,7 +84,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               Phone Number
             </label>
             <input
-                placeholder="+1 202-555-0136"
+              placeholder="+1 202-555-0136"
               className=" w-full px-4 py-3 border-[1px] border-secondary-200 rounded-md text-14 font-bold"
               type="tel"
               id="phone"
@@ -108,7 +104,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               Address
             </label>
             <input
-            placeholder="1137 Williams Avenue"
+              placeholder="1137 Williams Avenue"
               className=" w-full px-4 py-3 border-[1px] border-secondary-200 rounded-md text-14 font-bold"
               type="text"
               id="address"
@@ -123,7 +119,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               ZIP Code
             </label>
             <input
-                placeholder="100 01"
+              placeholder="100 01"
               className=" w-full px-4 py-3 border-[1px] border-secondary-200 rounded-md text-14 font-bold"
               type="text"
               id="zip"
@@ -139,7 +135,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
             </label>
             <input
               className=" w-full px-4 py-3 border-[1px] border-secondary-200 rounded-md text-14 font-bold"
-                placeholder="New York"
+              placeholder="New York"
               type="text"
               id="city"
               value={details.city}
@@ -153,7 +149,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               Country
             </label>
             <input
-                placeholder="United States"
+              placeholder="United States"
               className=" w-full px-4 py-3 border-[1px] border-secondary-200 rounded-md text-14 font-bold"
               type="text"
               id="country"
@@ -163,59 +159,73 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
         </section>
 
         <section className="w-full flex flex-col justify-start gap-2 items-center">
-  <h1 className="text-primary-100 text-13 tracking-1 w-full text-start font-bold">
-    PAYMENT DETAILS
-  </h1>
+          <h1 className="text-primary-100 text-13 tracking-1 w-full text-start font-bold">
+            PAYMENT DETAILS
+          </h1>
 
-  <fieldset className="flex flex-col w-full gap-1">
-    <legend className="w-full font-manrope text-[12px] font-bold text-black">
-      Payment Method
-    </legend>
-    <section className={`px-4 py-3 border-[1px] ${paypal ? "border-primary-100" : "border-secondary-200"} active:border-primary-100 selection:border-primary-100 focus:border-primary-100 rounded-md`}>
-      <label className="flex items-center" htmlFor="paypal"
-      onClick={(e) => e.stopPropagation()}>
-        <input
-          className="mr-2 accent-primary-100"
-          type="radio"
-          id="paypal"
-          name="method"
-          value="paypal"
-          checked={details.method === "paypal"}
-          onChange={(e) => {
-            setDetails({ ...details, method: e.target.value });
-            setPaypal(true);
-          }}
-        />
-        <span className="font-manrope text-[12px] font-bold text-black">
-          Paypal
-        </span>
-      </label>
-    </section>
-  </fieldset>
+          <fieldset className="flex flex-col w-full gap-1">
+            <legend className="w-full font-manrope text-[12px] font-bold text-black">
+              Payment Method
+            </legend>
+            <section
+              className={`px-4 py-3 border-[1px] ${
+                paypal ? "border-primary-100" : "border-secondary-200"
+              } active:border-primary-100 selection:border-primary-100 focus:border-primary-100 rounded-md`}
+            >
+              <label
+                className="flex items-center"
+                htmlFor="paypal"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <input
+                  className="mr-2 accent-primary-100"
+                  type="radio"
+                  id="paypal"
+                  name="method"
+                  value="paypal"
+                  checked={details.method === "paypal"}
+                  onChange={(e) => {
+                    setDetails({ ...details, method: e.target.value });
+                    setPaypal(true);
+                  }}
+                />
+                <span className="font-manrope text-[12px] font-bold text-black">
+                  Paypal
+                </span>
+              </label>
+            </section>
+          </fieldset>
 
-  <fieldset className="flex flex-col w-full gap-1 pb-6">
-    <section className={`px-4 py-3 border-[1px] ${credit ? "border-primary-100" : "border-secondary-200"} active:border-primary-100 selection:border-primary-100 focus:border-primary-100 rounded-md`}>
-      <label className="flex items-center" htmlFor="credit"
-      onClick={(e) => e.stopPropagation()}>
-        <input
-          className="mr-2 accent-primary-100"
-          type="radio"
-          id="credit"
-          name="method"
-          value="credit"
-          checked={details.method === "credit"}
-          onChange={(e) => {
-            setDetails({ ...details, method: e.target.value });
-            setCredit(true);
-          }}
-        />
-        <span className="font-manrope text-[12px] font-bold text-black">
-          Credit Card
-        </span>
-      </label>
-    </section>
-  </fieldset>
-</section>
+          <fieldset className="flex flex-col w-full gap-1 pb-6">
+            <section
+              className={`px-4 py-3 border-[1px] ${
+                credit ? "border-primary-100" : "border-secondary-200"
+              } active:border-primary-100 selection:border-primary-100 focus:border-primary-100 rounded-md`}
+            >
+              <label
+                className="flex items-center"
+                htmlFor="credit"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <input
+                  className="mr-2 accent-primary-100"
+                  type="radio"
+                  id="credit"
+                  name="method"
+                  value="credit"
+                  checked={details.method === "credit"}
+                  onChange={(e) => {
+                    setDetails({ ...details, method: e.target.value });
+                    setCredit(true);
+                  }}
+                />
+                <span className="font-manrope text-[12px] font-bold text-black">
+                  Credit Card
+                </span>
+              </label>
+            </section>
+          </fieldset>
+        </section>
       </form>
     </section>
   );
