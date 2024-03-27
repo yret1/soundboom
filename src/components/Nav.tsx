@@ -38,7 +38,10 @@ const Nav: React.FC<NavOptionsProps> = ({ setCurrent }) => {
       </AnimatePresence>
 
       <div className="h-full flex-1 flex justify-center md:justify-start items-center">
+        <Link to={"/"}>
+
         <img src={Logo} alt="" />
+        </Link>
       </div>
       <nav className="flex-1 hidden lg:block">
         <ul className="flex justify-center gap-10 items-center font-manrope tracking-2 font-bold text-white">
