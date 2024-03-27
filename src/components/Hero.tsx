@@ -29,7 +29,3 @@ const Hero : React.FC<HeroProps> = ({find}) => {
 };
 
 export default Hero;
-
-/* 
-<section className="flex justify-center items-center bg-[url('/src/assets/home/desktop/image-hero.jpg')] bg-cover bg-[top_right_-7.5rem] h-[33rem] md:bg-[center_right_3rem] lg:bg-[bg-cover] lg:h-[50rem] lg:justify-start lg:items-center lg:bg-[bottom_right_-8rem]">
-*/
