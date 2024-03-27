@@ -107,7 +107,7 @@ function App() {
 
 
 
-  const productHandler = ({id}: {id: number}) => {
+  const productHandler = (id : number) => {
     const product = allProducts.find((item : any) => item.id === id);
 
     if(product) {
