@@ -25,12 +25,40 @@ interface Details {
   method: string;
 }
 
+type Product = {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  category: string;
+  description: string;
+  features: string[];
+  includes: string[];
+  gallery: string[];
+  others?: string[];
+}
+
 
 
 function App() {
 
   const [category, setCategory] = useState<string>("Headphones");
   const [products, setProducts] = useState<object[]>([]);
+
+  const [allProducts, setAllProducts] = useState<object[]>([...headphoneCategories, ...speakerCategories, ...earCategories])
+
+  const [currentProduct, setCurrentProduct] = useState<Product>({
+    id: 0,
+    name: "",
+    image: "",
+    price: 0,
+    category: "",
+    description: "",
+    features: [],
+    includes: [],
+    gallery: [],
+    others: []
+  })
 
   const [details, setDetails] = useState<Details>({
     name: "",
@@ -43,9 +71,16 @@ function App() {
     method: "",
   })
 
+  useEffect(()=> {
+    console.log(currentProduct)
+    console.log(allProducts)
+  }, [currentProduct])
+
 
 
   useEffect(() => {
+
+    setAllProducts([...headphoneCategories, ...speakerCategories, ...earCategories])
 
     if (category === "Headphones") {
       setProducts(headphoneCategories)
@@ -58,6 +93,7 @@ function App() {
   }, [category])
 
   const ScrollToTop = () => {
+    
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -71,6 +107,18 @@ function App() {
 
 
 
+  const productHandler = ({id}: {id: number}) => {
+    const product = allProducts.find((item : any) => item.id === id);
+
+    if(product) {
+      setCurrentProduct(product as Product);
+    }
+    else {
+      console.log("Product not found");
+    }
+  }
+
+
   return (
     <BrowserRouter>
       <main className="font-manrope overflow-x-hidden">
@@ -78,7 +126,7 @@ function App() {
             <ScrollToTop />
           <Routes>
           <Route path="/" element={<Home setCategory={setCategory} />} />
-            <Route path="/product" element={<ProductDetail />} />
+            <Route path="/product" element={<ProductDetail  />} />
             <Route path="/category" element={<Category products={products as any} current={category} setCurrent={setCategory} />} />
             <Route path="/checkout" element={<Checkout details={details} setDetails={setDetails} />} />
           </Routes>
@@ -90,3 +138,4 @@ function App() {
 }
 
 export default App
+

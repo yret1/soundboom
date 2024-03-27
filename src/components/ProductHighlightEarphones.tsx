@@ -1,6 +1,9 @@
 import ButtonBorder from './ButtonBorder'
 
+
+
 const ProductHighlightEarphones = () => {
+
   return (
     <section className='w-full p-6 flex flex-wrap flex-col md:flex-row gap-6'>
 

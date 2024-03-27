@@ -4,19 +4,24 @@ import ProductHighlightSpeakerOrange from "../components/ProductHighlightSpeaker
 import ProductHighlightSpeakerGray from "../components/ProductHighlightSpeakerGray"
 import ProductHighlightEarphones from "../components/ProductHighlightEarphones"
 
+
+
+
+
 interface HomeProps {
-  setCategory: (category: string) => void
+  setCategory: (category: string) => void,
 
 }
+
 
 const Home: React.FC<HomeProps> = ({ setCategory }) => {
   return (
     <>
         <Hero/>
         <Navoptions setCurrent={setCategory} />
-        <ProductHighlightSpeakerOrange/>
-        <ProductHighlightSpeakerGray/>
-        <ProductHighlightEarphones/>
+        <ProductHighlightSpeakerOrange />
+        <ProductHighlightSpeakerGray />
+        <ProductHighlightEarphones />
 
     </>
   )
