@@ -1,6 +1,6 @@
 import AddRemoveItem from "./AddRemoveItem";
-import Button from "./Button";
 import { Link } from "react-router-dom";
+import Cartutton from "./Cartbutton";
 
 interface ProductArticleProps {
   text: {
@@ -56,7 +56,7 @@ const ProductArticle : React.FC<ProductArticleProps> = ({text}) => {
             <article className="flex gap-6 justify-start items-center">
               <AddRemoveItem />
 
-              <Button />
+              <Cartutton />
             </article>
           </article>
         </article>
