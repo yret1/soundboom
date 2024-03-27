@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "./Button";
+import Cartutton from "./Cartbutton";
 
 const YouMayAlsoLikeArticle = () => {
   const [imageSrc, setImageSrc] = useState(
@@ -39,7 +40,7 @@ const YouMayAlsoLikeArticle = () => {
       <h1 className="text-black text-24 font-bold mb-6 text-center">
         XX99 Mark II Headphones
       </h1>
-      <Button />
+      <Cartutton />
     </section>
   );
 };
