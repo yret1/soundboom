@@ -10,18 +10,19 @@ import ProductHighlightEarphones from "../components/ProductHighlightEarphones"
 
 interface HomeProps {
   setCategory: (category: string) => void,
+  find: (id : number) => void
 
 }
 
 
-const Home: React.FC<HomeProps> = ({ setCategory }) => {
+const Home: React.FC<HomeProps> = ({ setCategory , find }) => {
   return (
     <>
         <Hero/>
         <Navoptions setCurrent={setCategory} />
-        <ProductHighlightSpeakerOrange />
-        <ProductHighlightSpeakerGray />
-        <ProductHighlightEarphones />
+        <ProductHighlightSpeakerOrange find={find} />
+        <ProductHighlightSpeakerGray find={find} />
+        <ProductHighlightEarphones find={find} />
 
     </>
   )

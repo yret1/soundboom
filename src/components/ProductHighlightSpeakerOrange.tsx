@@ -1,6 +1,11 @@
 import ButtonBlack from './ButtonBlack'
 
-const ProductHighlightSpeakerOrange = () => {
+interface staticProps {
+    find: (id : number) => void
+  
+  }
+
+const ProductHighlightSpeakerOrange : React.FC<staticProps> = ({find}) => {
   return (
     <section className='w-full p-6'>
 
@@ -11,7 +16,7 @@ const ProductHighlightSpeakerOrange = () => {
                         <article className='flex flex-col justify-center items-center text-center lg:text-left lg:justify-start lg:items-start lg:pr-40'>
                             <h1 className="text-white text-40 font-bold mb-6 md:text-56">ZX9 <br></br> SPEAKER</h1>
                             <p className="text-white text-15 leading-25 mb-6 w-80 lg:w-96">Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
-                            <ButtonBlack/>
+                            <ButtonBlack find={find} id={6}/>
                         </article>
                 </article>
             </article>

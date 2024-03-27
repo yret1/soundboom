@@ -125,7 +125,7 @@ function App() {
         <Nav setCurrent={setCategory}/>
             <ScrollToTop />
           <Routes>
-          <Route path="/" element={<Home setCategory={setCategory} />} />
+          <Route path="/" element={<Home setCategory={setCategory} find={productHandler} />} />
             <Route path="/product" element={<ProductDetail  />} />
             <Route path="/category" element={<Category products={products as any} current={category} setCurrent={setCategory} />} />
             <Route path="/checkout" element={<Checkout details={details} setDetails={setDetails} />} />
