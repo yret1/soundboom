@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 
 interface Product {
+  id:number;
   name: string;
   description: string;
   image: {
@@ -14,9 +15,11 @@ interface Product {
 const Catproductdisplay = ({
   product,
   index,
+  find
 }: {
   product: Product;
   index: number;
+  find: (id: number) => void;
 }) => {
   const name: string = product.name;
 
@@ -47,7 +50,7 @@ const Catproductdisplay = ({
         </h2>
 
         <Link to="/product">
-          <Button />
+          <Button find={find} id={product.id} />
         </Link>
       </section>
     </article>

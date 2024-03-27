@@ -29,12 +29,14 @@ type CategoryProps = {
   current: string;
   setCurrent: (category: string) => void;
   products: Products;
+  find: (id: number) => void;
 };
 
 const Category: React.FC<CategoryProps> = ({
   current,
   setCurrent,
   products,
+  find,
 }) => {
   return (
     <section>
@@ -50,6 +52,7 @@ const Category: React.FC<CategoryProps> = ({
               key={product.id}
               index={index}
               product={product}
+              find={find}
             />
           );
         })}

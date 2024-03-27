@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
@@ -26,14 +27,35 @@ interface Details {
 type Product = {
   id: number;
   name: string;
-  image: string;
+  image: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
   price: number;
   category: string;
   description: string;
   features: string[];
   includes: string[];
-  gallery: string[];
+  gallery: {
+    first: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+    };
+    second: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+    };
+    third: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+    }
+  };
   others?: string[];
+  new: boolean;
 };
 
 function App() {
@@ -49,14 +71,35 @@ function App() {
   const [currentProduct, setCurrentProduct] = useState<Product>({
     id: 0,
     name: "",
-    image: "",
+    image: {
+      mobile: "",
+      tablet: "",
+      desktop: "",
+    },
     price: 0,
     category: "",
     description: "",
     features: [],
     includes: [],
-    gallery: [],
+    gallery: {
+      first: {
+        mobile: "",
+        tablet: "",
+        desktop: "",
+      },
+      second: {
+        mobile: "",
+        tablet: "",
+        desktop: "",
+      },
+      third: {
+        mobile: "",
+        tablet: "",
+        desktop: "",
+      }
+    },
     others: [],
+    new: false,
   });
 
   const [details, setDetails] = useState<Details>({
@@ -78,6 +121,8 @@ function App() {
       ...earCategories,
     ]);
 
+    console.log(allProducts);
+
     if (category === "Headphones") {
       setProducts(headphoneCategories);
     } else if (category === "Speakers") {
@@ -86,6 +131,11 @@ function App() {
       setProducts(earCategories);
     }
   }, [category]);
+
+
+  useEffect(() => {
+    productHandler(1);
+  },[allProducts])
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -98,6 +148,8 @@ function App() {
 
     return null;
   };
+
+
 
   const productHandler = (id: number) => {
     const product = allProducts.find((item: any) => item.id === id);
@@ -119,12 +171,13 @@ function App() {
             path="/"
             element={<Home setCategory={setCategory} find={productHandler} />}
           />
-          <Route path="/product" element={<ProductDetail />} />
+          <Route path="/product" element={<ProductDetail find={productHandler} product={currentProduct as any} />} />
           <Route
             path="/category"
             element={
               <Category
                 products={products as any}
+                find={productHandler}
                 current={category}
                 setCurrent={setCategory}
               />
