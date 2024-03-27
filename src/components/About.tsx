@@ -4,10 +4,13 @@ import bgDesk from "/assets/shared/desktop/image-best-gear.jpg";
 
 
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 
 
 const About = () => {
+
+    const {pathname} = useLocation()
 
 
     const [small, setSmall] = useState(false)
@@ -37,6 +40,7 @@ const About = () => {
         }
     },[])
 
+    if(pathname !== "/checkout") {
   return (
     <article className="w-full p-6 lg:px-20 flex flex-col lg:flex-row-reverse">
 
@@ -50,6 +54,10 @@ const About = () => {
         </section>
     </article>
   )
+    }
+
+    else
+    return null
 }
 
 export default About
