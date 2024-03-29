@@ -8,27 +8,21 @@ const YouMayAlsoLikeArticle = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      // Check if the screen width is >= 768 pixels (md size)
       if (window.innerWidth >= 768) {
-        // Update the image source for md screens
         setImageSrc(
           "/assets/shared/desktop/image-xx99-mark-one-headphones.jpg"
-        ); // Example path, change it as needed
+        );
       } else {
-        // Update the image source for smaller screens
         setImageSrc("/assets/shared/mobile/image-xx99-mark-one-headphones.jpg");
       }
     };
 
-    // Add event listener
     window.addEventListener("resize", handleResize);
 
-    // Call handleResize initially in case the user loads the page on a md screen
     handleResize();
 
-    // Cleanup function to remove the event listener
     return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty dependency array means this effect runs only once on mount
+  }, []);
 
   return (
     <section className="w-full px-6 py-6 flex flex-col justify-center items-center">
