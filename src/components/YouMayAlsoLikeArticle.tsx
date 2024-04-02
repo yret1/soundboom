@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
 import Cartutton from "./Cartbutton";
 
-const YouMayAlsoLikeArticle = () => {
+interface YouMayAlsoLikeArticleProps {
+  slug: string;
+  name: string;
+  image: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
+}
+
+const YouMayAlsoLikeArticle: React.FC<YouMayAlsoLikeArticleProps> = ({name, image}) => {
   const [imageSrc, setImageSrc] = useState(
-    "/assets/shared/mobile/image-xx99-mark-one-headphones.jpg"
+    image.mobile
   );
 
+  /* UseEffect som anpassar vilken bild som visas beroende på skärmstorlek */
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setImageSrc(
-          "/assets/shared/desktop/image-xx99-mark-one-headphones.jpg"
-        );
+        setImageSrc(image.desktop);
       } else {
-        setImageSrc("/assets/shared/mobile/image-xx99-mark-one-headphones.jpg");
+        setImageSrc(image.mobile);
       }
     };
 
@@ -31,7 +40,7 @@ const YouMayAlsoLikeArticle = () => {
         src={imageSrc}
       ></img>
       <h1 className="text-black text-24 font-bold mb-6 text-center">
-        XX99 Mark II Headphones
+        {name}
       </h1>
       <Cartutton />
     </section>

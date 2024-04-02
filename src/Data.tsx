@@ -89,7 +89,6 @@ export const earCategories = [
   },
 ]
 
-
 export const headphoneCategories = [
   {
     "id": 4,

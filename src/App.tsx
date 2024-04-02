@@ -24,6 +24,16 @@ interface Details {
   method: string;
 }
 
+type OtherProduct = {
+  slug: string;
+  name: string;
+  image: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
+};
+
 type Product = {
   id: number;
   name: string;
@@ -54,7 +64,7 @@ type Product = {
       desktop: string;
     }
   };
-  others?: string[];
+  others?: OtherProduct[];
   new: boolean;
 };
 
