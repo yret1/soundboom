@@ -2,6 +2,16 @@ import AddRemoveItem from "./AddRemoveItem";
 import { Link } from "react-router-dom";
 import Cartutton from "./Cartbutton";
 
+type OtherProduct = {
+  slug: string;
+  name: string;
+  image: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
+};
+
 interface ProductArticleProps {
   text: {
     name: string;
@@ -12,7 +22,7 @@ interface ProductArticleProps {
       desktop: string;
     };
     description: string;
-    others: string[];
+    others?: OtherProduct[];
     new: boolean;
   };
 

@@ -3,7 +3,15 @@ import ProductFeatures from '../components/ProductFeatures'
 import YouMayAlsoLike from '../components/YouMayAlsoLike'
 import ProductImageGrid from '../components/ProductImageGrid'
 
-
+type OtherProduct = {
+  slug: string;
+  name: string;
+  image: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
+};
 
 type Product = {
   id: number;
@@ -35,7 +43,7 @@ type Product = {
       desktop: string;
     };
   };
-  others?: string[];
+  others?: OtherProduct[];
   new: boolean;
 };
 
@@ -43,6 +51,7 @@ interface currentProduct {
   product: Product,
   find: (id: number) => void
 }
+
 
 const ProductDetail : React.FC<currentProduct> = ({product}) => {
 
@@ -66,19 +75,12 @@ const ProductDetail : React.FC<currentProduct> = ({product}) => {
 
   const images = product.gallery;
 
-
-
-
-
-
-
-
   return (
     <>
       <ProductArticle text={text}/>
       <ProductFeatures features={features} includes={includes} />
       <ProductImageGrid images={images}/>
-      <YouMayAlsoLike />
+      <YouMayAlsoLike  others={product.others || []}/>
     </>
   )
 }
