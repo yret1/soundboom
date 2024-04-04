@@ -2,6 +2,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
+import { useDispatch} from "react-redux";
+
+
 import { useState, useEffect } from "react";
 
 import Footer from "./components/Footer";
@@ -24,73 +27,106 @@ interface Details {
   method: string;
 }
 
-type OtherProduct = {
+
+interface Product {
+  id: number;
   slug: string;
   name: string;
   image: {
-    mobile: string;
-    tablet: string;
-    desktop: string;
+      mobile: string;
+      tablet: string;
+      desktop: string;
   };
-};
-
-type Product = {
-  id: number;
-  name: string;
-  image: {
-    mobile: string;
-    tablet: string;
-    desktop: string;
-  };
-  price: number;
   category: string;
-  description: string;
-  features: string[];
-  includes: string[];
-  gallery: {
-    first: {
+  categoryImage: {
       mobile: string;
       tablet: string;
       desktop: string;
-    };
-    second: {
-      mobile: string;
-      tablet: string;
-      desktop: string;
-    };
-    third: {
-      mobile: string;
-      tablet: string;
-      desktop: string;
-    }
   };
-  others?: OtherProduct[];
   new: boolean;
-};
+  price: number;
+  description: string;
+  features: string;
+  includes: {
+      quantity: number;
+      item: string;
+  }[];
+  gallery: {
+      first: {
+          mobile: string;
+          tablet: string;
+          desktop: string;
+      };
+      second: {
+          mobile: string;
+          tablet: string;
+          desktop: string;
+      };
+      third: {
+          mobile: string;
+          tablet: string;
+          desktop: string;
+      };
+  };
+  others: {
+      slug: string;
+      name: string;
+      image: {
+          mobile: string;
+          tablet: string;
+          desktop: string;
+      };
+  }[];
+}
 
-function App() {
+const App = () => {
+
+
+  const dispatch = useDispatch();
+
+  const handleProductstate = (products : Product[]) => {
+    dispatch({ type: "ADD_PRODUCTS", payload: products });
+  };
+
+  const currentProductHandler = (product : Product) => {
+    dispatch({type: "SET_CURRENT", payload: product})
+  }
+
+
   const [category, setCategory] = useState<string>("Headphones");
   const [products, setProducts] = useState<object[]>([]);
 
-  const [allProducts, setAllProducts] = useState<object[]>([
+  const [allProducts, setAllProducts] = useState<Product[]>([
     ...headphoneCategories,
     ...speakerCategories,
     ...earCategories,
   ]);
 
   const [currentProduct, setCurrentProduct] = useState<Product>({
-    id: 0,
     name: "",
+    slug: "",
+    id: 0,
     image: {
       mobile: "",
       tablet: "",
       desktop: "",
     },
-    price: 0,
     category: "",
+    categoryImage: {
+      mobile: "",
+      tablet: "",
+      desktop: "",
+    },
+    new: false,
+    price: 0,
     description: "",
-    features: [],
-    includes: [],
+    features: "",
+    includes: [
+      {
+        quantity: 0,
+        item: "",
+      },
+    ],
     gallery: {
       first: {
         mobile: "",
@@ -106,10 +142,19 @@ function App() {
         mobile: "",
         tablet: "",
         desktop: "",
-      }
+      },
     },
-    others: [],
-    new: false,
+    others: [
+      {
+        slug: "",
+        name: "",
+        image: {
+          mobile: "",
+          tablet: "",
+          desktop: "",
+        },
+      },
+    ],
   });
 
   const [details, setDetails] = useState<Details>({
@@ -124,12 +169,20 @@ function App() {
   });
 
 
+  useEffect(() =>{
+    currentProductHandler(currentProduct);
+  },[currentProduct])
+
+
   useEffect(() => {
     setAllProducts([
       ...headphoneCategories,
       ...speakerCategories,
       ...earCategories,
     ]);
+
+
+    handleProductstate(allProducts);
 
     console.log(allProducts);
 
