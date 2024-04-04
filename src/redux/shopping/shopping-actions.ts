@@ -22,7 +22,7 @@ export const removeFromCart = (ItemID : number) => {
 
 export const adjustQuantity = (ItemID : number, value : number) => {
     return {
-        type: actionTypes.ADJUST_QUANTITY,
+        type: actionTypes.DECREASE_QUANTITY,
         payload: {
             id: ItemID,
             quantity: value

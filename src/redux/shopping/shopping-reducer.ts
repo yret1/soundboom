@@ -1,6 +1,6 @@
 import * as actionTypes from "./shopping-types"
 
-interface Product {
+export interface Product {
     id: number;
     slug: string;
     name: string;
@@ -51,7 +51,7 @@ interface Product {
     }[];
 }
 
-interface ProductAdded {
+export interface ProductAdded {
     id: number;
     quant: number;
     slug: string;
@@ -127,16 +127,50 @@ const shopReducer = (state = INITAL_STATE, action: { type: any; payload: any }) 
             }
         break
         case actionTypes.ADD_TO_CART:
-            return {
-                ...state,
-                cart: [...state.cart, action.payload]  
+            // eslint-disable-next-line no-case-declarations
+            const existingItemIndex = state.cart.findIndex(item => item.id === action.payload.id);
+
+            if (existingItemIndex !== -1) {
+                // Item already exists in cart, increase quantity
+                return {
+                    ...state,
+                    cart: state.cart.map((item, index) =>
+                        index === existingItemIndex ? { ...item, quant: item.quant + 1 } : item
+                    )
+                };
+            } else {
+                // Item doesn't exist in cart, add with quantity 1
+                return {
+                    ...state,
+                    cart: [...state.cart, { ...action.payload, quant: 1 }]
+                };
             }
         break
+
         case actionTypes.REMOVE_FROM_CART:
             return{}
         break
-        case actionTypes.ADJUST_QUANTITY:
+        case actionTypes.INCREASE_QUANTITY:
             return{}
+        break
+        case actionTypes.DECREASE_QUANTITY:
+            // eslint-disable-next-line no-case-declarations
+            const itemquantcheck = state.cart.findIndex(item => item.id === action.payload.id);
+            if (itemquantcheck !== -1) {
+                if (state.cart[itemquantcheck].quant > 1) {
+                    return {
+                        ...state,
+                        cart: state.cart.map((item, index) =>
+                            index === itemquantcheck ? { ...item, quant: item.quant - 1 } : item
+                        )
+                    };
+                } else {
+                    return {
+                        ...state,
+                        cart: state.cart.filter((item) => item.id !== action.payload.id)
+                    };
+                }
+            }
         break
         case actionTypes.LOAD_CURRENT_ITEM:
             return{}
