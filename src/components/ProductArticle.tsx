@@ -26,7 +26,6 @@ interface ProductArticleProps {
     others?: OtherProduct[];
     new: boolean;
   };
-
 }
 
 const ProductArticle : React.FC<ProductArticleProps> = ({text}) => {
