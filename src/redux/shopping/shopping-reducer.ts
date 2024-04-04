@@ -117,11 +117,20 @@ const INITAL_STATE : State = {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const shopReducer = (state = INITAL_STATE, action: { type: any; }) => {
+const shopReducer = (state = INITAL_STATE, action: { type: any; payload: any }) => {
 
     switch(action.type){
+        case actionTypes.SET_CURRENT:
+            return{
+                ...state,
+                currentItem: action.payload
+            }
+        break
         case actionTypes.ADD_TO_CART:
-            return {}
+            return {
+                ...state,
+                cart: [...state.cart, action.payload]  
+            }
         break
         case actionTypes.REMOVE_FROM_CART:
             return{}
@@ -132,6 +141,11 @@ const shopReducer = (state = INITAL_STATE, action: { type: any; }) => {
         case actionTypes.LOAD_CURRENT_ITEM:
             return{}
         break
+        case actionTypes.ADD_PRODUCTS:
+            return{
+                ...state,
+                products: action.payload,
+            }
         default:
             return state
     }
