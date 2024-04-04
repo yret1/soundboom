@@ -1,3 +1,4 @@
+import { Product } from "../../utils/types"
 import * as actionTypes from "./shopping-types"
 
 export const addToCart = (ItemID : number) => {
@@ -29,7 +30,7 @@ export const adjustQuantity = (ItemID : number, value : number) => {
     }
 }
 
-export const loadCurrentItem = (item) => {
+export const loadCurrentItem = (item : Product) => {
     return {
         type: actionTypes.LOAD_CURRENT_ITEM,
         payload: item
