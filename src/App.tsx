@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
 import { useDispatch} from "react-redux";
-
-
 import { useState, useEffect } from "react";
 
 import Footer from "./components/Footer";
@@ -15,6 +12,9 @@ import ProductDetail from "./pages/ProductDetail";
 import Category from "./pages/Category";
 import { speakerCategories, headphoneCategories, earCategories } from "./Data";
 import { Checkout } from "./pages/Checkout";
+import CartModal from './components/CartModal';
+
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Details {
   name: string;
@@ -81,6 +81,7 @@ interface Product {
 
 const App = () => {
 
+  const [cartClicked, setCartClicked] = useState<boolean>(false)
 
   const dispatch = useDispatch();
 
@@ -224,12 +225,38 @@ const App = () => {
     }
   };
 
+
   return (
+    
     <BrowserRouter>
+    
       <main className="font-manrope overflow-x-hidden">
-        <Nav setCurrent={setCategory} />
+        <Nav 
+        setCurrent={setCategory}
+        cartClicked={cartClicked}
+        setCartClicked={setCartClicked}
+        />
         <ScrollToTop />
+        <AnimatePresence>
+        {cartClicked && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black bg-opacity-50 z--20"
+              onClick={() => setCartClicked(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            ></motion.div>
+            <CartModal 
+            cartClicked={cartClicked}
+            setCartClicked={setCartClicked}
+            />
+          </>
+        )}
+      </AnimatePresence>
         <Routes>
+        
           <Route
             path="/"
             element={<Home setCategory={setCategory} find={productHandler} />}

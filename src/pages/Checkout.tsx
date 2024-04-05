@@ -1,5 +1,8 @@
 import Back from "../components/Back";
 import { useEffect, useState } from "react";
+import Summary from "../components/Summary";
+import { motion, AnimatePresence } from "framer-motion";
+import ThankyouModal from "../components/ThankyouModal";
 
 interface Details {
   name: string;
@@ -20,6 +23,7 @@ type CheckoutProps = {
 export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
   const [paypal, setPaypal] = useState(false);
   const [credit, setCredit] = useState(false);
+  const [checkoutClicked, setCheckoutClicked] = useState<boolean>(false)
 
   useEffect(() => {
     if (details.method === "paypal") {
@@ -33,10 +37,28 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
   }, [paypal, credit]);
 
   return (
-    <section className="px-6 flex flex-col justify-center items-center bg-secondary-200">
+    <section className="px-6 bg-secondary-200">
       <Back />
-
-      <form className="flex flex-col items-center justify-center w-11/12 px-4 gap-6 bg-white rounded-md mb-10 p-2">
+      <AnimatePresence>
+        {checkoutClicked && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black bg-opacity-50 z--20"
+              onClick={() => setCheckoutClicked(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            ></motion.div>
+            <div className="flex justify-center items-center">
+            <ThankyouModal/>
+            </div>
+            
+          </>
+        )}
+      </AnimatePresence>
+      <div className="flex flex-col justify-center items-center px-6 lg:flex-row lg:items-start">
+      <form className=" bg-white w-full rounded-md mb-10 p-6">
         <legend className="text-black font-manrope font-bold text-28 text-start w-full  tracking-1">
           CHECKOUT
         </legend>
@@ -227,6 +249,12 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
           </fieldset>
         </section>
       </form>
-    </section>
+      <Summary
+      checkoutClicked={checkoutClicked}
+      setCheckoutClicked={setCheckoutClicked}
+      />
+</div>
+      
+      </section>
   );
 };
