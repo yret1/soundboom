@@ -45,14 +45,17 @@ const CartItem: React.FC<CartItemProps> = ({ product}) => {
 
   return (
     <article className='flex flex-row justify-between items-center pb-6'>
+        <article className='flex items-center'>
                 <img
-                className="rounded-md w-16 h-16 object-cover"
+                className="rounded-md w-16 h-16 object-cover mr-6"
                 src={productImage}
                 ></img>
                 <article className='flex flex-col'>
                     <p className='text-15 font-bold'>{productName}</p>
                     <p className='text-14 font-bold text-gray-500'>$ {productPrice}</p>
                 </article>
+        </article>
+                
                 {checkout ? (
                         <p className='text-14 font-bold text-gray-500'>x{productQuantity}</p>
                 ): (

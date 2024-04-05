@@ -6,10 +6,14 @@ import Hamburger from "/assets/shared/tablet/icon-hamburger.svg";
 import Logo from "/assets/shared/desktop/logo.svg";
 import Navoptionsdrop from "./Navoptionsdrop";
 
+
 interface NavOptionsProps {
   setCurrent: (category: string) => void;
+  setCartClicked: (value: boolean) => void;
+  cartClicked: boolean;
 }
-const Nav: React.FC<NavOptionsProps> = ({ setCurrent }) => {
+
+const Nav: React.FC<NavOptionsProps> = ({ setCurrent, setCartClicked, cartClicked }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -72,10 +76,12 @@ const Nav: React.FC<NavOptionsProps> = ({ setCurrent }) => {
         </ul>
       </nav>
       <div className="h-full w-12 flex justify-end pr-5 items-center">
-        <img src={Cart} className="w-8/12 max-w-12" alt="Cart Button" />
+        <img src={Cart} onClick={() => setCartClicked(!cartClicked)} className="w-8/12 max-w-12" alt="Cart Button" />
       </div>
     </header>
   );
 };
+
+
 
 export default Nav;

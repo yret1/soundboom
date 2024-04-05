@@ -2,9 +2,7 @@ import ProductArticle from '../components/ProductArticle'
 import ProductFeatures from '../components/ProductFeatures'
 import YouMayAlsoLike from '../components/YouMayAlsoLike'
 import ProductImageGrid from '../components/ProductImageGrid'
-import Cart from '../components/Cart';
-import Summary from '../components/Summary';
-import ThankyouModal from '../components/ThankyouModal';
+
 
 type OtherProduct = {
   slug: string;
@@ -84,9 +82,6 @@ const ProductDetail : React.FC<currentProduct> = ({product}) => {
       <ProductFeatures features={features} includes={includes} />
       <ProductImageGrid images={images}/>
       <YouMayAlsoLike  others={product.others || []}/>
-      <Cart/>
-      <Summary/>
-      <ThankyouModal/>
     </>
   )
 }
