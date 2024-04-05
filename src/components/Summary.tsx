@@ -1,5 +1,3 @@
-import CartItem from './CartItem'
-
 interface SummaryProps {
     setCheckoutClicked: (value: boolean) => void;
     checkoutClicked: boolean;
@@ -12,9 +10,7 @@ const Summary:React.FC<SummaryProps> = ({setCheckoutClicked, checkoutClicked}) =
             <article className='flex justify-between'>
                 <p className='text-18 font-bold mb-6'>Summary</p>
             </article>
-            <CartItem inCartPage={false}/>
-            <CartItem inCartPage={false}/>
-            <CartItem inCartPage={false}/>
+            {/* CART ITEMS HERE */}
             
             <article className='flex justify-between'>
                 <p className='text-15 text-gray-500'>TOTAL</p>
