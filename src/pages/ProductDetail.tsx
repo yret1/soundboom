@@ -3,6 +3,7 @@ import ProductFeatures from '../components/ProductFeatures'
 import YouMayAlsoLike from '../components/YouMayAlsoLike'
 import ProductImageGrid from '../components/ProductImageGrid'
 
+
 type OtherProduct = {
   slug: string;
   name: string;
