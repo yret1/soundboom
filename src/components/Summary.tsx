@@ -1,5 +1,3 @@
-import CartItem from './CartItem'
-
 const Summary = () => {
   return (
     <section className="rounded-md h-full mx-6 my-6 bg-gray-300">
@@ -7,9 +5,7 @@ const Summary = () => {
             <article className='flex justify-between'>
                 <p className='text-18 font-bold mb-6'>Summary</p>
             </article>
-            <CartItem inCartPage={false}/>
-            <CartItem inCartPage={false}/>
-            <CartItem inCartPage={false}/>
+                {/* CART ITEMS HERE */}
             
             <article className='flex justify-between'>
                 <p className='text-15 text-gray-500'>TOTAL</p>
