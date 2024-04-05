@@ -5,3 +5,4 @@ export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
 export const ADD_PRODUCTS = "ADD_PRODUCTS";
 export const SET_CURRENT = "SET_CURRENT";
+export const CLEAR_CART = "CLEAR_CART";

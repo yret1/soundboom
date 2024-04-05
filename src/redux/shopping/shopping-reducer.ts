@@ -126,6 +126,13 @@ const shopReducer = (state = INITAL_STATE, action: { type: any; payload: any }) 
                 currentItem: action.payload
             }
         break
+        case actionTypes.CLEAR_CART:
+            return{
+                ...state,
+                cart: []
+            }
+
+        break
         case actionTypes.ADD_TO_CART:
             // eslint-disable-next-line no-case-declarations
             const existingItemIndex = state.cart.findIndex(item => item.id === action.payload.id);
@@ -150,9 +157,6 @@ const shopReducer = (state = INITAL_STATE, action: { type: any; payload: any }) 
         case actionTypes.REMOVE_FROM_CART:
             return{}
         break
-        case actionTypes.INCREASE_QUANTITY:
-            return{}
-        break
         case actionTypes.DECREASE_QUANTITY:
             // eslint-disable-next-line no-case-declarations
             const itemquantcheck = state.cart.findIndex(item => item.id === action.payload.id);
@@ -171,9 +175,6 @@ const shopReducer = (state = INITAL_STATE, action: { type: any; payload: any }) 
                     };
                 }
             }
-        break
-        case actionTypes.LOAD_CURRENT_ITEM:
-            return{}
         break
         case actionTypes.ADD_PRODUCTS:
             return{
