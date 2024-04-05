@@ -67,8 +67,6 @@ const ProductArticle : React.FC<ProductArticleProps> = ({text}) => {
               <AddRemoveContext>
                 <AddRemoveItem />
               </AddRemoveContext>
-              
-
               <Cartutton />
             </article>
           </article>
