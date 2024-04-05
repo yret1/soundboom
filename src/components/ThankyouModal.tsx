@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ThankyouModal = () => {
   return (
     <section className="rounded-md h-full mx-6 my-6 bg-gray-300">
