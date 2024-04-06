@@ -241,13 +241,14 @@ const App = () => {
         {cartClicked && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black bg-opacity-50 z--20"
+              className="fixed inset-0 bg-black bg-opacity-50 z-20"
               onClick={() => setCartClicked(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            ></motion.div>
+              exit={{ opacity: 0}}
+              transition={{ duration: 0.2 }}
+              >
+              </motion.div>
             <CartModal 
             cartClicked={cartClicked}
             setCartClicked={setCartClicked}

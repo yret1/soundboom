@@ -3,6 +3,8 @@ import { Product, ProductAdded } from '../redux/shopping/shopping-reducer'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 
+import { motion, AnimatePresence} from 'framer-motion'
+
 import CartItem from './CartItem'
 interface CartModalProps {
     setCartClicked: (value: boolean) => void;
@@ -48,7 +50,14 @@ const Cart: React.FC<CartModalProps> = ({setCartClicked, cartClicked}) => {
     }
     return (
         <section className='flex justify-end'>
-<section className="rounded-md min-w-[350px] h-auto mx-6 my-6 md:w-[450px] bg-white fixed z-10">
+            <AnimatePresence>
+{cartClicked &&
+<motion.section
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{ duration: 0.2 }}
+     className="rounded-md min-w-[350px] h-auto mx-6 my-6 md:w-[450px] bg-white fixed z-40">
             <article className='p-6 flex flex-col'>
                 <article className='flex justify-between'>
                     <p className='text-18 font-bold mb-6'>Cart ({currentCart.length})</p>
@@ -70,7 +79,9 @@ const Cart: React.FC<CartModalProps> = ({setCartClicked, cartClicked}) => {
                     </button>
                 </Link>
             </article>
-        </section>  
+        </motion.section>  }
+        </AnimatePresence>
+        
         </section>
 
     )
