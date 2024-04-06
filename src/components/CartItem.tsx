@@ -25,7 +25,7 @@ const CartItem: React.FC<CartItemProps> = ({ product}) => {
 
 
     useEffect(() => {
-        if (path.pathname === "/cart") {
+        if (path.pathname === "/checkout") {
             setCheckout(true);
         } else {
             setCheckout(false);

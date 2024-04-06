@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import Logo from "/assets/shared/desktop/logo.svg";
+
 interface NavOptionsProps {
   setCurrent: (category: string) => void;
 }
@@ -8,10 +10,12 @@ const Footer: React.FC<NavOptionsProps> = ({ setCurrent }) => {
   return (
     <footer className="bg-secondary-100 h-auto">
       <section className="px-12 md:px-40">
-        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-          <h1 className="text-white font-bold text-28 text-center py-12 md:text-left">
-            SoundBoom
-          </h1>
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center pt-10">
+          <div className="w-full h-full flex justify-center items-center md:justify-start">
+            <Link to={"/"}>
+              <img src={Logo} alt="Soundboom Logo" className="mt-4 mb-4 max-w-60 md:max-w-96" />
+            </Link>
+          </div>
           <ul className="text-white font-bold text-13 flex items-center justify-center flex-col uppercase gap-4 pb-12 md:flex-row md:justify-start lg:pb-0">
             <Link to={"/"} className="tracking-2 hover:text-primary-100">
               Home
