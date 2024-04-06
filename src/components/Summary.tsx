@@ -21,8 +21,6 @@ const Summary:React.FC<SummaryProps> = ({setCheckoutClicked, checkoutClicked}) =
     const handleCheckoutClicked = () => {
         setCheckoutClicked(!checkoutClicked);
 
-        setCheckedCart(cart);
-
         dispatch({type: "CLEAR_CART"})
     };
 
@@ -35,7 +33,7 @@ const Summary:React.FC<SummaryProps> = ({setCheckoutClicked, checkoutClicked}) =
 
     const [SHIPPING, setSHIPPING] = useState<boolean>(false);
 
-    const [checkedCart, setCheckedCart] = useState<ProductAdded[]>([]);
+    // const [checkedCart, setCheckedCart] = useState<ProductAdded[]>([]);
 
     const [resetChecked, setResetChecked] = useState<boolean>(false);
 
@@ -48,7 +46,6 @@ const Summary:React.FC<SummaryProps> = ({setCheckoutClicked, checkoutClicked}) =
 
     useEffect(() => {
 
-        const checked = checkedCart;
 
         const vat = 0.2;
 
@@ -65,14 +62,14 @@ const Summary:React.FC<SummaryProps> = ({setCheckoutClicked, checkoutClicked}) =
         }else{
             setSHIPPING(false);
         }
-        checked
+
 
 
     },[cart])
 
     useEffect(() => {
         if(resetChecked){
-            setCheckedCart([]);
+            // setCheckedCart([]);
         }
     }, [resetChecked])
 
