@@ -230,7 +230,7 @@ const App = () => {
     
     <BrowserRouter>
     
-      <main className="font-manrope overflow-x-hidden">
+      <main className="font-manrope bg-white overflow-x-hidden">
         <Nav 
         setCurrent={setCategory}
         cartClicked={cartClicked}
