@@ -96,6 +96,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               type="email"
               id="email"
               value={details.email}
+              onChange={(e) => setDetails({ ...details, email: e.target.value })}
             />
           </fieldset>
           <fieldset className="flex flex-col w-full gap-1">
@@ -111,6 +112,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               type="tel"
               id="phone"
               value={details.phone}
+              onChange={(e) => setDetails({ ...details, phone: e.target.value })}
             />
           </fieldset>
         </section>
@@ -131,6 +133,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               type="text"
               id="address"
               value={details.address}
+              onChange={(e) => setDetails({ ...details, address: e.target.value })}
             />
           </fieldset>
           <fieldset className="flex flex-col w-full gap-1">
@@ -146,6 +149,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               type="text"
               id="zip"
               value={details.zip}
+              onChange={(e) => setDetails({ ...details, zip: e.target.value })}
             />
           </fieldset>
           <fieldset className="flex flex-col w-full gap-1">
@@ -161,6 +165,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               type="text"
               id="city"
               value={details.city}
+              onChange={(e) => setDetails({ ...details, city: e.target.value })}
             />
           </fieldset>
           <fieldset className="flex flex-col w-full gap-1">
@@ -176,6 +181,9 @@ export const Checkout: React.FC<CheckoutProps> = ({ details, setDetails }) => {
               type="text"
               id="country"
               value={details.country}
+              onChange={(e) =>
+                setDetails({ ...details, country: e.target.value })
+              }
             />
           </fieldset>
         </section>
