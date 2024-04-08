@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { useState, useEffect, useRef } from "react";
 
 import Footer from "./components/Footer";
 import About from "./components/About";
@@ -15,6 +15,9 @@ import { Checkout } from "./pages/Checkout";
 import CartModal from './components/CartModal';
 
 import { motion, AnimatePresence } from "framer-motion";
+
+import { State } from "./redux/rootReducer";
+import CartAnimation from "./components/Cartanim";
 
 interface Details {
   name: string;
@@ -81,9 +84,15 @@ interface Product {
 
 const App = () => {
 
+
+
+  const cartRef = useRef<HTMLImageElement>(null)
+
   const [cartClicked, setCartClicked] = useState<boolean>(false)
 
   const dispatch = useDispatch();
+
+  const cart = useSelector((state: State ) => state.shop.cart)
 
   const handleProductstate = (products : Product[]) => {
     dispatch({ type: "ADD_PRODUCTS", payload: products });
@@ -169,6 +178,42 @@ const App = () => {
     method: "",
   });
 
+  const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
+
+
+  const [prevPathname, setPrevPathname] = useState<string>("");
+
+ 
+
+  const [adding, setAdding] = useState<boolean>(false)
+
+  const [prevCartLength, setPrevCartLength] = useState<number>(0);
+
+
+
+
+  useEffect(() => {
+    // On initial mount, set the previous cart length
+    setPrevCartLength(cart.length);
+  }, []); // Run only once on mount
+
+  useEffect(() => {
+    // Check if cart length has increased
+    if (cart.length > prevCartLength) {
+      // Cart length has increased, trigger animation or other action
+      console.log('Cart length increased!');
+      setAdding(true)
+      // Add animation logic here
+    }
+
+    setPrevCartLength(cart.length)
+
+    setTimeout(() => {
+      setAdding(false)
+    },500)
+  }, [cart]); // Run whenever cart changes
+
+
 
   useEffect(() =>{
     currentProductHandler(currentProduct);
@@ -203,16 +248,17 @@ const App = () => {
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
-
+  
     useEffect(() => {
-      if (pathname !== "/checkout") {
-        window.scrollTo(0, 0);
+      // Check if the previous pathname is different from the current one
+      if (prevPathname !== pathname && pathname !== "/checkout") {
+        window.scrollTo(0, 0); // Scroll to the top
+        setPrevPathname(pathname); // Update the previous pathname
       }
-    }, [pathname]);
-
+    }, [pathname, prevPathname]);
+  
     return null;
   };
-
 
 
   const productHandler = (id: number) => {
@@ -225,18 +271,29 @@ const App = () => {
     }
   };
 
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDotPosition({ x: event.clientX, y: event.clientY });
+  };
+
 
   return (
     
     <BrowserRouter>
     
-      <main className="font-manrope bg-white overflow-x-hidden">
+      <main className="font-manrope bg-white overflow-x-hidden" onMouseMove={handleMouseMove}>
+
+        {adding && (
+          <CartAnimation cartRef={cartRef} dotpos={dotPosition} />
+        )}
         <Nav 
         setCurrent={setCategory}
         cartClicked={cartClicked}
         setCartClicked={setCartClicked}
+        cartRef={cartRef}
         />
         <ScrollToTop />
+
         <AnimatePresence>
         {cartClicked && (
           <>
@@ -248,11 +305,12 @@ const App = () => {
               exit={{ opacity: 0}}
               transition={{ duration: 0.2 }}
               >
-              </motion.div>
-            <CartModal 
+                <CartModal 
             cartClicked={cartClicked}
             setCartClicked={setCartClicked}
             />
+              </motion.div>
+            
           </>
         )}
       </AnimatePresence>
