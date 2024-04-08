@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { useState, useEffect, useRef } from "react";
 
 import Footer from "./components/Footer";
 import About from "./components/About";
@@ -15,6 +15,8 @@ import { Checkout } from "./pages/Checkout";
 import CartModal from './components/CartModal';
 
 import { motion, AnimatePresence } from "framer-motion";
+
+import { State } from "./redux/rootReducer";
 
 interface Details {
   name: string;
@@ -81,9 +83,15 @@ interface Product {
 
 const App = () => {
 
+
+
+  const cartRef = useRef<HTMLImageElement>(null)
+
   const [cartClicked, setCartClicked] = useState<boolean>(false)
 
   const dispatch = useDispatch();
+
+  const cart = useSelector((state: State ) => state.shop.cart)
 
   const handleProductstate = (products : Product[]) => {
     dispatch({ type: "ADD_PRODUCTS", payload: products });
@@ -169,6 +177,54 @@ const App = () => {
     method: "",
   });
 
+  interface Pos {
+    x:number,
+    y:number
+
+  }
+
+
+  const [position, setPosition] = useState<Pos>({x: 0, y:0})
+  const [prevCartLength, setPrevCartLength] = useState<number>(0);
+
+
+  useEffect(() => {
+    const updatePosition = () => {
+      if (cartRef.current) {
+        const rect = cartRef.current.getBoundingClientRect();
+        setPosition({ x: rect.left, y: rect.top });
+      }
+    };
+
+    updatePosition();
+
+    // Recalculate position on window resize
+    window.addEventListener('resize', updatePosition);
+
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    // On initial mount, set the previous cart length
+    setPrevCartLength(cart.length);
+  }, []); // Run only once on mount
+
+  useEffect(() => {
+    // Check if cart length has increased
+    if (cart.length > prevCartLength) {
+      // Cart length has increased, trigger animation or other action
+      console.log('Cart length increased!');
+      // Add animation logic here
+    }
+
+    // Update previous cart length
+    setPrevCartLength(cart.length);
+  }, [cart]); // Run whenever cart changes
+
+
 
   useEffect(() =>{
     currentProductHandler(currentProduct);
@@ -235,6 +291,7 @@ const App = () => {
         setCurrent={setCategory}
         cartClicked={cartClicked}
         setCartClicked={setCartClicked}
+        cartRef={cartRef}
         />
         <ScrollToTop />
         <AnimatePresence>

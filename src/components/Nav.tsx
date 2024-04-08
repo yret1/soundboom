@@ -11,9 +11,10 @@ interface NavOptionsProps {
   setCurrent: (category: string) => void;
   setCartClicked: (value: boolean) => void;
   cartClicked: boolean;
+  cartRef: React.RefObject<HTMLImageElement>;
 }
 
-const Nav: React.FC<NavOptionsProps> = ({ setCurrent, setCartClicked, cartClicked }) => {
+const Nav: React.FC<NavOptionsProps> = ({ setCurrent, setCartClicked, cartClicked, cartRef }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -76,7 +77,7 @@ const Nav: React.FC<NavOptionsProps> = ({ setCurrent, setCartClicked, cartClicke
         </ul>
       </nav>
       <div className="h-full w-12 flex justify-end pr-5 items-center">
-        <img src={Cart} onClick={() => setCartClicked(!cartClicked)} className="w-8/12 max-w-12 cursor-pointer" alt="Cart Button" />
+        <img ref={cartRef} src={Cart} onClick={() => setCartClicked(!cartClicked)} className="w-8/12 max-w-12 cursor-pointer" alt="Cart Button" />
       </div>
     </header>
   );
