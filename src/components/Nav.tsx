@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import Cart from "/assets/shared/desktop/icon-cart.svg";
 import Hamburger from "/assets/shared/tablet/icon-hamburger.svg";
 import Logo from "/assets/shared/desktop/logo.svg";
 import Navoptionsdrop from "./Navoptionsdrop";
+import { State } from "../redux/rootReducer";
+import { useSelector } from "react-redux";
 
 
 interface NavOptionsProps {
@@ -15,7 +17,24 @@ interface NavOptionsProps {
 }
 
 const Nav: React.FC<NavOptionsProps> = ({ setCurrent, setCartClicked, cartClicked, cartRef }) => {
+
+  const cart = useSelector((state: State ) => state.shop.cart)
+
   const [open, setOpen] = useState(false);
+
+  const [cartvalue, setCartValue] = useState<number>();
+
+
+
+
+  useEffect(() => {
+
+
+    setTimeout(()=> {
+      setCartValue(cart.length)
+    },500)
+
+  },[cart])
 
   return (
     <header className="bg-secondary-100 h-20 flex justify-center pl-5 relative items-center lg:px-20">
@@ -76,7 +95,14 @@ const Nav: React.FC<NavOptionsProps> = ({ setCurrent, setCartClicked, cartClicke
           </Link>
         </ul>
       </nav>
-      <div className="h-full w-12 flex justify-end pr-5 items-center">
+      <div className="h-full w-12 flex justify-end relative pr-5 items-center">
+        {cartvalue && cartvalue >= 1 ? (
+          <div className="h-5 flex justify-center items-center top-3 right-0 rounded-full w-5 bg-primary-100 absolute">
+          <p className="text-[14px] font-bold text-white">{cartvalue}</p>
+        </div>
+
+        ): ""}
+       
         <img ref={cartRef} src={Cart} onClick={() => setCartClicked(!cartClicked)} className="w-8/12 max-w-12 cursor-pointer" alt="Cart Button" />
       </div>
     </header>

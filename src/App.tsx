@@ -17,6 +17,7 @@ import CartModal from './components/CartModal';
 import { motion, AnimatePresence } from "framer-motion";
 
 import { State } from "./redux/rootReducer";
+import CartAnimation from "./components/Cartanim";
 
 interface Details {
   name: string;
@@ -177,34 +178,18 @@ const App = () => {
     method: "",
   });
 
-  interface Pos {
-    x:number,
-    y:number
-
-  }
+  const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
 
 
-  const [position, setPosition] = useState<Pos>({x: 0, y:0})
+  const [prevPathname, setPrevPathname] = useState<string>("");
+
+ 
+
+  const [adding, setAdding] = useState<boolean>(false)
+
   const [prevCartLength, setPrevCartLength] = useState<number>(0);
 
 
-  useEffect(() => {
-    const updatePosition = () => {
-      if (cartRef.current) {
-        const rect = cartRef.current.getBoundingClientRect();
-        setPosition({ x: rect.left, y: rect.top });
-      }
-    };
-
-    updatePosition();
-
-    // Recalculate position on window resize
-    window.addEventListener('resize', updatePosition);
-
-    return () => {
-      window.removeEventListener('resize', updatePosition);
-    };
-  }, []);
 
 
   useEffect(() => {
@@ -217,11 +202,15 @@ const App = () => {
     if (cart.length > prevCartLength) {
       // Cart length has increased, trigger animation or other action
       console.log('Cart length increased!');
+      setAdding(true)
       // Add animation logic here
     }
 
-    // Update previous cart length
-    setPrevCartLength(cart.length);
+    setPrevCartLength(cart.length)
+
+    setTimeout(() => {
+      setAdding(false)
+    },500)
   }, [cart]); // Run whenever cart changes
 
 
@@ -259,16 +248,17 @@ const App = () => {
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
-
+  
     useEffect(() => {
-      if (pathname !== "/checkout") {
-        window.scrollTo(0, 0);
+      // Check if the previous pathname is different from the current one
+      if (prevPathname !== pathname && pathname !== "/checkout") {
+        window.scrollTo(0, 0); // Scroll to the top
+        setPrevPathname(pathname); // Update the previous pathname
       }
-    }, [pathname]);
-
+    }, [pathname, prevPathname]);
+  
     return null;
   };
-
 
 
   const productHandler = (id: number) => {
@@ -281,12 +271,21 @@ const App = () => {
     }
   };
 
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDotPosition({ x: event.clientX, y: event.clientY });
+  };
+
 
   return (
     
     <BrowserRouter>
     
-      <main className="font-manrope bg-white overflow-x-hidden">
+      <main className="font-manrope bg-white overflow-x-hidden" onMouseMove={handleMouseMove}>
+
+        {adding && (
+          <CartAnimation cartRef={cartRef} dotpos={dotPosition} />
+        )}
         <Nav 
         setCurrent={setCategory}
         cartClicked={cartClicked}
@@ -294,6 +293,7 @@ const App = () => {
         cartRef={cartRef}
         />
         <ScrollToTop />
+
         <AnimatePresence>
         {cartClicked && (
           <>
@@ -305,11 +305,12 @@ const App = () => {
               exit={{ opacity: 0}}
               transition={{ duration: 0.2 }}
               >
-              </motion.div>
-            <CartModal 
+                <CartModal 
             cartClicked={cartClicked}
             setCartClicked={setCartClicked}
             />
+              </motion.div>
+            
           </>
         )}
       </AnimatePresence>
