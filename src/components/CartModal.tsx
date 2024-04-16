@@ -66,7 +66,6 @@ const Cart: React.FC<CartModalProps> = ({setCartClicked, cartClicked}) => {
                 
                 {currentCart && currentCart.map((product: ProductAdded) => (
                     <CartItem key={product.id} product={product}/>
-                
                 ))}
                 
                 <article className='flex justify-between'>

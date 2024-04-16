@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Cartutton from "./Cartbutton";
+import ButtonBlack from "./ButtonBlack";
 
 interface YouMayAlsoLikeArticleProps {
   slug: string;
@@ -9,9 +9,10 @@ interface YouMayAlsoLikeArticleProps {
     tablet: string;
     desktop: string;
   };
+  find: (id: number) => void;
 }
 
-const YouMayAlsoLikeArticle: React.FC<YouMayAlsoLikeArticleProps> = ({name, image}) => {
+const YouMayAlsoLikeArticle: React.FC<YouMayAlsoLikeArticleProps> = ({name, image, find}) => {
   const [imageSrc, setImageSrc] = useState(
     image.mobile
   );
@@ -42,7 +43,7 @@ const YouMayAlsoLikeArticle: React.FC<YouMayAlsoLikeArticleProps> = ({name, imag
       <h1 className="text-black text-24 font-bold mb-6 text-center">
         {name}
       </h1>
-      <Cartutton />
+      <ButtonBlack find={find} id={6} />
     </section>
   );
 };
